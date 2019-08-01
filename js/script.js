@@ -76,7 +76,7 @@ window.onload = function () {
       Game.plCompCount += 1
     }
 
-    selectedSquares.push(setYellowSquare(Game.squares));
+    selectedSquares.push(setYellowSquare());
     Game.detected = false;
     playerUser.innerText = Game.plUserCount;
     playerPC.innerText = Game.plCompCount;
