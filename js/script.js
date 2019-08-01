@@ -113,10 +113,10 @@ window.onload = function () {
   };
 
 
-  function setYellowSquare(squares) {
+  function setYellowSquare() {
     let randomNum = checkRandom(random(0, 100));
 
-    squares.forEach(sq => {
+    Game.squares.forEach(sq => {
       let id = sq.getAttribute('data-id');
       if (Number(id) === randomNum) {
         sq.classList.remove('blue');
