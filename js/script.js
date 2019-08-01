@@ -6,8 +6,8 @@ window.onload = function () {
     winResult = 10;
 
   Game.gameRun = false;
-    Game.plCompCount = 0;
-    Game.plUserCount = 0;
+  Game.plCompCount = 0;
+  Game.plUserCount = 0;
 
 
   let gameField = document.querySelector('.game-field'),
@@ -23,7 +23,6 @@ window.onload = function () {
 
   initSquares();
 
-
   Game.startGame = ()=> {
     if (Game.gameRun) {
       return;
@@ -32,13 +31,13 @@ window.onload = function () {
     Game.gameRun = true;
     Game.detected = false;
     Game.squares = [...squares];
-    Game.runGame(Game.squares);
+    Game.runGame();
   };
 
 
-  Game.runGame = (squares)=> {
+  Game.runGame = ()=> {
     gameField.addEventListener('click', Game.detectSquare);
-    selectedSquares.push(setYellowSquare(squares));
+    selectedSquares.push(setYellowSquare());
 
     Game.interval = setInterval(function () {
       Game.gameInterval()
@@ -47,17 +46,16 @@ window.onload = function () {
 
 
   Game.detectSquare = (e) => {
-    let el = e.target;
-    if (!el.matches('.squareItem') || el.classList.contains('blue') || el.classList.contains('red')) {
+    if (! e.target.matches('.yellow')) {
       return;
     }
+
     Game.detected = true;
   };
 
 
   Game.gameInterval = () => {
-    if (selectedSquares.length === squaresAmount || Game.plUserCount === winResult ||
-      Game.plCompCount === winResult) {
+    if (Game.plUserCount === winResult || Game.plCompCount === winResult) {
       Game.finishGame();
       return;
     }
@@ -133,7 +131,8 @@ window.onload = function () {
     for (let i = 0; i < squaresAmount; i++) {
       createSquare(gameField, i)
     }
-  };
+  }
+
 
   function checkRandom(num) {
     return (selectedSquares.some(el => el === num)) ? checkRandom(random(0, 100)) : num;
